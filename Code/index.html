@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Lists</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css">
+    <link rel="stylesheet" href="assets/css/-Login-form-Page-BS4-.css">
+    <link rel="stylesheet" href="assets/css/Login-Form-Dark.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+</head>
+
+<body><!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-analytics.js"></script>
+  <!-- Add Firebase products that you want to use -->
+  <script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-database.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyCU35pGmj05vpsKLFcdyBsar--Ywzh0sT4",
+    authDomain: "playground-92061.firebaseapp.com",
+    databaseURL: "https://playground-92061.firebaseio.com",
+    projectId: "playground-92061",
+    storageBucket: "playground-92061.appspot.com",
+    messagingSenderId: "236025261382",
+    appId: "1:236025261382:web:06f406414232437b474947",
+    measurementId: "G-DHVMV37LXL"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script>
+
+    <div style="background-image: url(&quot;assets/img/star-sky.jpg&quot;);background-size: cover;background-repeat: repeat-y;min-height: 100vh;max-height: 100%;">
+        <div class="container-fluid" style="padding-right: 0px;padding-left: 0px;margin-bottom: 10px;">
+            <nav class="navbar navbar-dark navbar-expand-md sticky-top">
+                <div class="container-fluid"><a class="navbar-brand" href="/index.html">Lists</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+                    <div class="collapse navbar-collapse"
+                        id="navcol-1">
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item" role="presentation" id="usersMenu" style="display: none;"><a class="nav-link active" href="/Users.html">Users</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item" role="presentation" style="display: block;"><a class="nav-link active" href="#"><button class="btn btn-outline-primary" id="logInButton" data-toggle="modal" data-target="#signin" type="button">Log In</button></a></li>
+                            <li class="nav-item" role="presentation" style="display: block;"><a class="nav-link active" href="#"><button class="btn btn-primary" id="signUpButton" data-toggle="modal" data-target="#signup" type="button">Sign Up</button></a></li>
+                            <li class="nav-item" role="presentation" id="logOutButton"
+                                style="display: none;"><a class="nav-link active" href="#"><button id="logOutButton" onClick="logOut()" class="btn btn-danger" data- type="button">Log out</button></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div class="modal fade" role="dialog" tabindex="-1" id="signin">
+                <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Sign In</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="text-primary input-group-text"><i class="fa fa-envelope-o"></i></span></div><input class="form-control" type="email" id="email" required="" placeholder="Email">
+                                        <div class="input-group-append"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="text-primary input-group-text"><i class="fa fa-lock"></i></span></div><input class="form-control" type="password" id="pass" required="" placeholder="Password">
+                                        <div class="input-group-append"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group"><button onClick="logIn()" class="btn btn-primary btn-lg text-white" style="width: 100%;" type="button">Log in</button></div>
+                            </form>
+                            <hr style="background-color: #bababa;">
+                            <p class="text-center">Or&nbsp;<a class="text-decoration-none" href="#">Forget password</a></p>
+                            <p class="text-center">Don't have an account? &nbsp;<a class="text-decoration-none" data-dismiss="modal" data-toggle="modal" data-target="#signup" href="#">Sign Up</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" role="dialog" tabindex="-1" id="signup">
+                <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Sign Up Now</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+                        <div class="modal-body">
+                            <form class="mt-4">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="text-primary input-group-text"><i class="fa fa-user-o"></i></span></div><input class="form-control" type="text" id="fullName" required="" placeholder="Full name">
+                                        <div class="input-group-append"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="text-primary input-group-text"><i class="fa fa-envelope-o"></i></span></div><input class="form-control" type="email" id="emailI" required="" placeholder="Email">
+                                        <div class="input-group-append"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="text-primary input-group-text"><i class="fa fa-lock"></i></span></div><input class="form-control" type="password" id="passl" required="" placeholder="Password">
+                                        <div class="input-group-append"></div>
+                                    </div>
+                                </div>
+                                <p class="text-center">Please don't use your bank password here</p>
+                                <div class="form-group">
+                                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-1" required="" checked=""><label class="form-check-label" for="formCheck-1">I agree to nothing.</label></div>
+                                </div>
+                                <div class="form-group"><button onClick="signUp()" class="btn btn-primary btn-lg text-white" style="width: 100%;" type="button">Sign Up</button></div>
+                            </form>
+                            <hr style="background-color: #bababa;">
+                            <p class="text-center">Already have an Account?&nbsp;<a class="text-decoration-none" data-dismiss="modal" data-toggle="modal" data-target="#signin" href="#">Log In</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="navBarName" style="display: none;font-size: 16px;display: none;flex-wrap: wrap;color: rgb(255,255,255);">
+            <h1 style="text-align: center;font-size: inherit;">Welcome back,&nbsp;</h1>
+            <p id="navBarFName" style="font-size: inherit;">Paragraph</p>
+        </div>
+        <h1 class="text-center" id="head" style="color: rgb(255,255,255);"></h1>
+        <div id="mainFun" style="display: none;padding-top: 12%;">
+            <h1 class="text-center" style="color: rgb(255,255,255);">My Lists</h1>
+            <div id="Bcollapse-1" style="margin-bottom: 10px;"><a class="btn btn-outline-primary" data-toggle="collapse" aria-expanded="false" aria-controls="collapse-1" href="#collapse-1" role="button" style="width: 50%;margin-right: 25%;margin-left: 25%;">Add new list</a>
+                <div class="collapse" id="collapse-1">
+                    <div id="collapseContent" style="background-color: rgba(255,255,255,0.3);margin-right: 15%;margin-left: 15%;padding-top: 4%;padding-right: 4%;padding-bottom: 4%;padding-left: 4%;">
+                        <form>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-prepend"><span class="text-primary input-group-text"><i class="fa fa-file-text"></i></span></div><input class="form-control" type="email" id="Title" required="" placeholder="Title">
+                                    <div class="input-group-append"></div>
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-bottom: 0px;">
+                                <div class="input-group">
+                                    <div class="input-group-prepend"><span class="text-primary input-group-text"><i class="far fa-star"></i></span></div><input class="form-control" type="email" id="Obj1" required="" placeholder="Task 1">
+                                    <div class="input-group-append"></div>
+                                </div>
+                            </div>
+                            <div id="addObj"></div>
+                            <div class="form-group" style="margin-top: 18px;"><button onClick="oneMoreObj()" class="btn btn-primary btn-lg text-white" style="width: 100%;" type="button">One more task</button></div>
+                            <div class="form-group" id="addButton"><button onClick="addList()" class="btn btn-primary btn-lg text-white" style="width: 100%;" type="button">Add</button></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center align-items-start" style="border: 1px solid rgb(0,123,255);display: flex;flex-wrap: wrap;margin-left: 5%;margin-right: 5%;">
+                <div class="d-flex justify-content-center align-items-start" id="lists" style="display: flex;flex-wrap: wrap;"></div>
+            </div>
+            <div class="text-center d-xl-flex" style="display: flex;flex-wrap: wrap;margin-left: 5%;margin-right: 5%;display: flex;flex-wrap: wrap;margin-top: 41px;"><a class="btn btn-outline-warning" data-toggle="collapse" aria-expanded="false" aria-controls="collapse-2" href="#collapse-2" role="button" style="width: 100%;">Archived</a>
+                <div class="collapse" id="collapse-2">
+                    <div id="archiveList" style="display: flex;flex-wrap: wrap;width: 100%;height: 100%;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script >
+    var CurrentUser = {};
+	var lists;
+
+function logIn() {
+    var email = $("#email").val();
+    var password = $("#pass").val();
+
+    firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        alert(errorMessage);
+    });
+    $("#signin").modal('hide');
+}
+
+function signUp() {
+    var fullName = $("#fullName").val();
+    var email = $("#emailI").val();
+    var password = $("#passl").val();
+
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+        .then(() => {
+            let userId = firebase.auth().currentUser.uid;
+            firebase.database().ref('users/' + userId).set({
+                fullName: fullName,
+                Email: email,
+                password: password,
+                userType: "user"
+            }).then(() => {
+                alert('Your Account Created Successfully!');
+            })
+        })
+        .catch((error) => {
+            alert(error);
+        })
+    $("#signup").modal('hide');
+}
+
+firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+        CurrentUser = user;
+        document.getElementById('logInButton').style.display = 'none';
+        document.getElementById('logOutButton').style.display = 'block';
+        document.getElementById('signUpButton').style.display = 'none';
+
+        return firebase.database().ref('users/' + user.uid).once('value').then(function(snapshot) {
+		
+            document.getElementById('navBarName').style.display = 'flex';
+
+            $("#navBarFName").html("<h1 style=\"font-size: inherit;\">" + snapshot.val().fullName + "</h1>");
+            // Load all the 
+            document.getElementById('lists').style.display = 'block';
+			document.getElementById('mainFun').style.display = 'block';
+
+			lists=snapshot.val().lists
+			if(lists!=null){
+			loadAllLists();
+			}else{
+				lists=new Array();
+			}
+        });
+
+    } else {
+        //alert("out");
+        // User is signed out.
+        // ...
+		document.getElementById('mainFun').style.display = 'none';
+        document.getElementById('lists').style.display = 'none';
+        document.getElementById('signUpButton').style.display = 'block';
+        document.getElementById('logInButton').style.display = 'block';
+        document.getElementById('logOutButton').style.display = 'none';
+        document.getElementById('usersMenu').style.display = 'none';
+        document.getElementById('navBarName').style.display = 'none';
+
+    }
+});
+
+function logOut() {
+    firebase.auth().signOut().then(function() {
+        CurrentUser = null;
+    }).catch(function(error) {
+    });
+}
+
+var currentObj = 1;
+
+function oneMoreObj() {
+    currentObj++;
+    $("#addObj").append("<div class=\"input-group\"><div class=\"input-group-prepend\"><span class=\"text-primary input-group-text\"><i class=\"far fa-star\"></i></span></div><input class=\"form-control\" type=\"email\" id=\"Obj" + currentObj + "\" required placeholder=\"Task " + currentObj + "\" /><div class=\"input-group-append\"></div></div></div>");
+}
+	
+function addList() {
+    let userId = firebase.auth().currentUser.uid;
+
+    var title = $("#Title").val();
+
+    document.getElementById('Title').value = " ";
+
+    var objectives = [];
+    var objectivesStatus = [];
+
+    for (i = 1; i <= currentObj; i++) {
+        objectives.push($("#Obj" + i).val());
+        document.getElementById('Obj' + i).value = " ";
+        objectivesStatus.push("false");
+    }
+
+    var ref = firebase.database().ref('users/' + userId + '/lists/');
+    ref.once('value').then(function(snapshot) {
+        var count = snapshot.numChildren();
+        firebase.database().ref('users/' + userId + '/lists/' + count).set({
+            status:2,
+			title: title,
+            objectives: objectives,
+            objectivesStatus: objectivesStatus
+        });
+		var d = {
+			status:2,
+			title: title,
+            objectives: objectives,
+            objectivesStatus: objectivesStatus
+		};
+		console.log(lists);
+		lists.push(d);
+		
+		
+        var html = "<div id=\"list" + count + "\" style=\"display: block;margin-bottom: 10px;margin-right: 10px;background-color: #515151;padding-right: 15px;padding-bottom: 15px;padding-left: 15px;padding-top: 15px;\"><div><div class=\"d-flex justify-content-center align-items-center justify-content-sm-center justify-content-md-center justify-content-lg-center justify-content-xl-center\" style=\"display: flex;flex-wrap: wrap;background-color: rgba(255,255,255,0.15);margin-bottom: 15px;\"><p class=\"d-xl-flex\" style=\"color: rgb(255,255,255);\">" + title + "</p></div></div>";
+        // for each obj
+        console.log(currentObj);
+        for (i = 0; i < currentObj; i++) {
+            html += "<div><div style=\"display: flex;flex-wrap: wrap;\"><span><i class=\"fa fa-check\" onClick=\"checkObj\(" + count + ","+i  + "\)\" style=\"font-size: 29px;color: #1eb53a;padding-right: 10px;\"></i></span><p id=\""+count+""+i+"\" style=\"color: rgb(255,255,255);\"><strong> Task " + (1+i) + ": " + objectives[i] + "</strong></p></div></div>";
+			
+			// HERE
+			
+        }
+        currentObj = 1;
+        html += "<div style=\"margin-bottom: 5px;margin-top: 30px;\"><div style=\"display: flex;flex-wrap: wrap;\"><button onClick=\"deleteList\(" + count + "\)\" class=\"btn btn-outline-danger\" type=\"button\" style=\"  width: 100%;\">Delete List</button></div></div><div style=\"margin-top: 5px;\"><div style=\"display: flex;flex-wrap: wrap;\"><button class=\"btn btn-outline-warning\" type=\"button\" onClick=\"archiveList\(" + count + "\)\" style=\"  width: 100%;\">Archive List</button></div></div></div>";
+        $("#lists").append(html);
+    });
+    //$("Bcollapse-1").collapse('hide'); not working
+
+    // reset the collapse content.
+    ResetAddListCollapse();
+}
+
+function ResetAddListCollapse(){
+	var orginialHTML = "<div id=\"collapseContent\" style=\"background-color: rgba(255,255,255,0.3);margin-right: 15%;margin-left: 15%;padding-top: 4%;padding-right: 4%;padding-bottom: 4%;padding-left: 4%;\"><form><div class=\"form-group\"><div class=\"input-group\"><div class=\"input-group-prepend\"><span class=\"text-primary input-group-text\"><i class=\"fa fa-file-text\"></i></span></div><input class=\"form-control\" type=\"email\" id=\"Title\" required placeholder=\"Title\" /><div class=\"input-group-append\"></div></div></div><div class=\"form-group\" style=\"margin-bottom: 0px;\"><div class=\"input-group\"><div class=\"input-group-prepend\"><span class=\"text-primary input-group-text\"><i class=\"far fa-star\"></i></span></div><input class=\"form-control\" type=\"email\" id=\"Obj1\" required placeholder=\"Task 1\" /><div class=\"input-group-append\"></div></div></div><div id=\"addObj\"></div><div class=\"form-group\" style=\"margin-top: 18px;\"><button class=\"btn btn-primary btn-lg text-white\" style=\"  width: 100%;\" onClick=\"oneMoreObj()\" type=\"button\">One more obj</button></div><div class=\"form-group\" onClick=\"addList()\" id=\"addButton\"><button class=\"btn btn-primary btn-lg text-white\" style=\"  width: 100%;\" type=\"button\">Add</button></div></form></div>";
+    $("#collapseContent").html(orginialHTML);
+}
+	
+function deleteList(listNum) {
+	var updates = {};
+	updates['/users/' +firebase.auth().currentUser.uid +'/lists/'+listNum+'/status/'] = "0";
+	firebase.database().ref().update(updates);	
+	lists[listNum].status="0";
+	loadAllLists();
+
+}
+
+function archiveList(listNum) {
+		var updates = {};
+		updates['/users/' +firebase.auth().currentUser.uid +'/lists/'+listNum+'/status/'] = "1";
+		firebase.database().ref().update(updates);	
+		lists[listNum].status="1";
+		loadAllLists();
+}
+
+// @parms i: List, J: Object number in list.
+function checkObj(i,j){
+	// if it's true make it false
+	
+	// update to database
+	var updates = {};
+	
+	if(lists[i].objectivesStatus[j]=="false"){
+		document.getElementById(i+""+j).style.textDecoration = "line-through";
+		lists[i].objectivesStatus[j]="true";
+		updates['/users/' +firebase.auth().currentUser.uid +'/lists/'+i+'/objectivesStatus/'+j] = "true";
+	}else{
+		document.getElementById(i+""+j).style.textDecoration = "none";
+		lists[i].objectivesStatus[j]="false";
+		updates['/users/' +firebase.auth().currentUser.uid +'/lists/'+i+'/objectivesStatus/'+j] = "false";	}
+ 	// update 
+	firebase.database().ref().update(updates);
+	console.log(lists[i]);
+}
+
+// load all lists from Lists var
+function loadAllLists(){
+	 document.getElementById("lists").innerHTML = '';
+	document.getElementById("archiveList").innerHTML = '';
+	for (i = 0; i < lists.length; i++) {
+		// 0 == deleted
+		// 1 == archived
+		// 2 == available
+		if	(lists[i].status==0){
+			 continue;
+			 }else{
+                var html = "<div id=\"list" + i + "\" style=\"display: block;margin-bottom: 10px;margin-right: 10px;background-color: #515151;padding-right: 15px;padding-bottom: 15px;padding-left: 15px;padding-top: 15px;\"><div><div class=\"d-flex justify-content-center align-items-center justify-content-sm-center justify-content-md-center justify-content-lg-center justify-content-xl-center\" style=\"display: flex;flex-wrap: wrap;background-color: rgba(255,255,255,0.15);margin-bottom: 15px;\"><p class=\"d-xl-flex\" style=\"color: rgb(255,255,255);\">" + lists[i].title + "</p></div></div>";
+                
+				// for each obj
+                for (j = 0; j < lists[i].objectives.length; j++) {
+                    html += "<div><div style=\"display: flex;flex-wrap: wrap;\"><span><i class=\"fa fa-check\" onClick=\"checkObj\(" + i + ","+j  + "\)\" style=\"font-size: 29px;color: #1eb53a;padding-right: 10px;\"></i></span><p><span ";
+					if(lists[i].objectivesStatus[j]=="true"){
+					html+=" style=\"text-decoration: line-through;\"";
+					}
+					html+="id=\""+i+""+j+"\" style=\"color: rgb(255,255,255);\"><strong>";
+					html+= "Task " + (j + 1) + ": " + lists[i].objectives[j] + "</strong></span></p></div></div>";
+                
+				}
+                html += "<div style=\"margin-bottom: 5px;margin-top: 30px;\"><div style=\"display: flex;flex-wrap: wrap;\"><button onClick=\"deleteList\(" + i + "\)\" class=\"btn btn-outline-danger\" type=\"button\" style=\"  width: 100%;\">Delete List</button></div></div><div style=\"margin-top: 5px;\"><div style=\"display: flex;flex-wrap: wrap;\"><button class=\"btn btn-outline-warning\" type=\"button\" onClick=\"archiveList\(" + i + "\)\" style=\"  width: 100%;\">Archive List</button></div></div></div>";
+                if(lists[i].status==1){
+					$("#archiveList").append(html);
+				}else if(lists[i].status==2){
+					$("#lists").append(html);
+				}
+            }
+	}
+}
+	
+</script><a class="bottom-right" href="https://www.a-fa.sa" target="_blank" style="&quot;color: rgba(255,255,255,0.3);font-size: 22px;&quot;">&nbsp;<i class="fa fa-eye" style="color: rgb(255,255,255);font-size: 30px;"></i></a>
+    <script
+        src="assets/js/jquery.min.js"></script>
+        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>
